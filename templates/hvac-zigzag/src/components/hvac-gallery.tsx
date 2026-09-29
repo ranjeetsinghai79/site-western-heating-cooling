@@ -9,20 +9,16 @@ interface Props { config: SiteConfig }
 interface GalleryPhoto { src: string; title: string; sub: string }
 
 const PHOTOS: GalleryPhoto[] = [
-  { src: "/gallery-1.jpg",  title: "Stocked & Ready",       sub: "Every truck, fully loaded" },
-  { src: "/gallery-2.jpg",  title: "Thermostat Install",    sub: "Smart, precise setup" },
-  { src: "/gallery-3.jpg",  title: "Condenser Tune-Up",     sub: "Backyard system check" },
-  { src: "/gallery-4.jpg",  title: "Furnace Diagnostics",   sub: "No shortcuts, ever" },
-  { src: "/gallery-5.jpg",  title: "Commercial HVAC",       sub: "Rooftop units, city-wide" },
-  { src: "/gallery-6.jpg",  title: "Full System Checklist", sub: "Every visit, documented" },
-  { src: "/gallery-7.jpg",  title: "On Our Way",            sub: "45-minute average response" },
-  { src: "/gallery-8.jpg",  title: "Plumbing Repair",       sub: "Fixed in one visit" },
-  { src: "/gallery-9.jpg",  title: "Burner Ignition",       sub: "Safety-checked heat" },
-  { src: "/gallery-10.jpg", title: "Refrigerant Check",     sub: "Manifold gauge diagnostics" },
-  { src: "/gallery-11.jpg", title: "Evening Call",          sub: "We answer around the clock" },
-  { src: "/gallery-12.jpg", title: "Late-Night Diagnostics", sub: "Emergency service, done right" },
-  { src: "/gallery-13.jpg", title: "New System Install",    sub: "Copper, done to code" },
-  { src: "/gallery-14.jpg", title: "Evening Repair",        sub: "Same crew, every time" },
+  { src: "/gallery-1.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
+  { src: "/gallery-2.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
+  { src: "/gallery-3.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
+  { src: "/gallery-4.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
+  { src: "/gallery-5.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
+  { src: "/gallery-6.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
+  { src: "/gallery-7.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
+  { src: "/gallery-8.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
+  { src: "/gallery-9.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
+  { src: "/gallery-10.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
 ]
 
 export default function HvacGallery({ config }: Props) {
