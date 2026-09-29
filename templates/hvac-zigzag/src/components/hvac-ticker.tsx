@@ -1,14 +1,12 @@
 "use client"
 
 const ITEMS = [
-  { label: "EMERGENCY DISPATCH ACTIVE", accent: true },
-  { label: "Average Response: 45 Min" },
-  { label: "4.9★ — 312 Google Reviews" },
-  { label: "NATE Certified Technicians" },
-  { label: "Same-Day Service Available" },
-  { label: "Licensed · Bonded · Insured" },
-  { label: "FREE Estimates — Call Now" },
-  { label: "Serving Tracy & Central Valley" },
+  { label: "CA License #999624", accent: true },
+  { label: "4.8★ Google Rating — 59 Reviews" },
+  { label: "PG&E Quality Installation Contractor" },
+  { label: "2015 PG&E ACQC Contractor of the Year" },
+  { label: "9,999+ Blower Motor Retrofits Performed" },
+  { label: "Serving Pleasanton & the Central Valley" },
 ]
 
 function TickerItem({ label, accent }: { label: string; accent?: boolean }) {
