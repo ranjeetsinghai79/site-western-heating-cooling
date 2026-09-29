@@ -8,18 +8,19 @@ interface Props { config: SiteConfig }
 
 interface GalleryPhoto { src: string; title: string; sub: string }
 
-const PHOTOS: GalleryPhoto[] = [
-  { src: "/gallery-1.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
-  { src: "/gallery-2.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
-  { src: "/gallery-3.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
-  { src: "/gallery-4.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
-  { src: "/gallery-5.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
-  { src: "/gallery-6.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
-  { src: "/gallery-7.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
-  { src: "/gallery-8.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
-  { src: "/gallery-9.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
-  { src: "/gallery-10.jpg", title: "Western Heating & Cooling", sub: "Pleasanton, CA" },
-]
+// No pipeline agent currently sources these /gallery-N.jpg files automatically
+// (they're uploaded manually per-build, if at all) and there's no per-photo
+// caption data, so captions here must stay generic and never claim a specific
+// job/task/response-time that wasn't verified (this file previously hardcoded
+// 14 invented captions like "45-minute average response" as its shipped
+// default — zero-fabrication rule, see CLAUDE.md's redesign skill notes).
+function buildPhotos(count: number, businessName: string, city?: string): GalleryPhoto[] {
+  return Array.from({ length: count }, (_, i) => ({
+    src: `/gallery-${i + 1}.jpg`,
+    title: businessName,
+    sub: city ?? "On the job",
+  }))
+}
 
 export default function HvacGallery({ config }: Props) {
   const sectionRef = useRef<HTMLElement>(null)
@@ -33,11 +34,14 @@ export default function HvacGallery({ config }: Props) {
 
   useEffect(() => {
     if (!headRef.current) return
-    gsap.from(headRef.current, {
-      opacity: 0, y: 30, duration: 0.7, ease: "power3.out",
-      immediateRender: false,
-      scrollTrigger: { trigger: headRef.current, start: "top 85%", once: true },
-    })
+    const ctx = gsap.context(() => {
+      gsap.from(headRef.current, {
+        opacity: 0, y: 30, duration: 0.7, ease: "power3.out",
+        immediateRender: false,
+        scrollTrigger: { trigger: headRef.current, start: "top 85%", once: true },
+      })
+    }, headRef)
+    return () => ctx.revert()
   }, [])
 
   useEffect(() => {
@@ -74,7 +78,8 @@ export default function HvacGallery({ config }: Props) {
     }
   }, [])
 
-  const anglePerItem = 360 / PHOTOS.length
+  const photos = buildPhotos(config.business.galleryCount ?? 6, config.business.name, config.business.city)
+  const anglePerItem = 360 / photos.length
   const radius = 460
 
   return (
@@ -113,7 +118,7 @@ export default function HvacGallery({ config }: Props) {
           className="relative w-full h-full"
           style={{ transform: `rotateY(${rotation}deg)`, transformStyle: "preserve-3d" }}
         >
-          {PHOTOS.map((photo, i) => {
+          {photos.map((photo, i) => {
             const itemAngle = i * anglePerItem
             const relative = (itemAngle + (rotation % 360) + 360) % 360
             const normalized = relative > 180 ? 360 - relative : relative
