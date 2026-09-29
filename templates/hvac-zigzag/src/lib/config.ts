@@ -62,7 +62,14 @@ export const config: SiteConfig = {
     }
   ],
 
-  testimonials: [],
+    trustBadges: [
+    "CA License #999624",
+    "4.8★ Google Rating",
+    "2015 PG&E ACQC Contractor of the Year",
+    "Mon–Fri 8AM–5PM",
+  ],
+
+testimonials: [],
 
   stats: [
     { value: 4.8, label: "Google Rating", suffix: "★", decimals: 1 },
