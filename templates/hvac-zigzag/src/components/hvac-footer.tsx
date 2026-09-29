@@ -125,7 +125,7 @@ export default function HvacFooter({ config }: Props) {
                 className="w-1.5 h-1.5 rounded-full"
                 style={{ background: "#4F46E5", boxShadow: "0 0 6px #4F46E5" }}
               />
-              24/7 Emergency
+              CA Lic #999624
             </div>
           </div>
         </div>
