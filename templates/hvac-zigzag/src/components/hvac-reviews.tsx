@@ -7,6 +7,39 @@ import type { SiteConfig, Testimonial } from "@core/web/types"
 
 interface Props { config: SiteConfig }
 
+// Real, verifiable fallback shown when there's no written review TEXT to
+// display (no fabricated customer quotes) — still honest and complete, not a
+// bare "coming soon" placeholder. Links out to the business's actual Google
+// Maps listing so a visitor can read the real reviews there.
+function RealRatingFallback({ config }: { config: SiteConfig }) {
+  const mapsUri = config.business.googleMapsUri
+  return (
+    <div className="flex flex-col items-center text-center gap-5 py-10">
+      <GoogleG />
+      <div
+        className="font-display font-700 tabular-nums"
+        style={{ fontFamily: "var(--font-display)", fontSize: "3.5rem", lineHeight: 1, color: "var(--brand-accent)" }}
+      >
+        {config.business.google_rating}
+      </div>
+      <StarRow n={5} />
+      <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: "var(--brand-fg-muted)", maxWidth: 420 }}>
+        Rated {config.business.google_rating} stars from {config.business.review_count}+ real Google reviews.
+      </p>
+      {mapsUri && (
+        <a
+          href={mapsUri}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-ghost inline-flex items-center gap-2 px-6 py-3 mt-2"
+        >
+          Read our reviews on Google
+        </a>
+      )}
+    </div>
+  )
+}
+
 function StarRow({ n }: { n: number }) {
   return (
     <div className="flex gap-1">
@@ -88,11 +121,14 @@ function CircularTestimonials({ testimonials, autoplay = true }: { testimonials:
   // Word-by-word quote reveal on change — GSAP, not Framer Motion
   useEffect(() => {
     if (!quoteRef.current) return
-    const words = quoteRef.current.querySelectorAll<HTMLElement>(".word")
-    gsap.fromTo(words,
-      { opacity: 0, y: 8 },
-      { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", stagger: 0.02 }
-    )
+    const ctx = gsap.context(() => {
+      const words = quoteRef.current!.querySelectorAll<HTMLElement>(".word")
+      gsap.fromTo(words,
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", stagger: 0.02 }
+      )
+    }, quoteRef)
+    return () => ctx.revert()
   }, [activeIndex])
 
   if (!active) return null
@@ -196,16 +232,19 @@ export default function HvacReviews({ config }: Props) {
 
   useEffect(() => {
     if (!headRef.current || !bodyRef.current) return
-    gsap.from(headRef.current, {
-      opacity: 0, y: 30, duration: 0.7, ease: "power3.out",
-      immediateRender: false,
-      scrollTrigger: { trigger: headRef.current, start: "top 85%", once: true },
-    })
-    gsap.from(bodyRef.current, {
-      opacity: 0, y: 40, duration: 0.8, ease: "power3.out",
-      immediateRender: false,
-      scrollTrigger: { trigger: bodyRef.current, start: "top 85%", once: true },
-    })
+    const ctx = gsap.context(() => {
+      gsap.from(headRef.current, {
+        opacity: 0, y: 30, duration: 0.7, ease: "power3.out",
+        immediateRender: false,
+        scrollTrigger: { trigger: headRef.current, start: "top 85%", once: true },
+      })
+      gsap.from(bodyRef.current, {
+        opacity: 0, y: 40, duration: 0.8, ease: "power3.out",
+        immediateRender: false,
+        scrollTrigger: { trigger: bodyRef.current, start: "top 85%", once: true },
+      })
+    }, sectionRef)
+    return () => ctx.revert()
   }, [])
 
   return (
@@ -273,7 +312,7 @@ export default function HvacReviews({ config }: Props) {
         <div ref={bodyRef} className="rounded-2xl p-8 lg:p-14" style={{ background: "var(--brand-bg)", border: "1px solid color-mix(in srgb, var(--brand-fg) 6%, transparent)" }}>
           {testimonials.length > 0
             ? <CircularTestimonials testimonials={testimonials} autoplay />
-            : <p style={{ color: "var(--brand-fg-muted)" }}>Reviews coming soon.</p>}
+            : <RealRatingFallback config={config} />}
         </div>
 
         {/* CTA */}
