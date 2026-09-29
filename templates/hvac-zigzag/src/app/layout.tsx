@@ -8,7 +8,7 @@ const { business } = config
 
 export const metadata: Metadata = {
   title: `${business.name} | ${business.address}`,
-  description: `${business.name} — Licensed HVAC & Plumbing serving ${business.serviceAreas.join(", ")}. 24/7 emergency service. Call ${business.phone}.`,
+  description: `${business.name} — Licensed HVAC contractor serving ${business.serviceAreas.join(", ")}. Call ${business.phone}.`,
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
