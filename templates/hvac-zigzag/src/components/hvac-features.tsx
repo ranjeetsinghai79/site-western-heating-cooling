@@ -57,6 +57,11 @@ const REASON_ICONS: Record<string, React.ReactElement> = {
       <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
     </svg>
   ),
+  "shield-check": (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+    </svg>
+  ),
 }
 
 export default function HvacFeatures({ config }: Props) {
@@ -67,49 +72,61 @@ export default function HvacFeatures({ config }: Props) {
 
   useEffect(() => {
     if (!headRef.current || !gridRef.current) return
+    const cleanups: Array<() => void> = []
 
-    gsap.from(headRef.current, {
-      opacity: 0, y: 30, duration: 0.7, ease: "power3.out",
-      immediateRender: false,
-      scrollTrigger: { trigger: headRef.current, start: "top 85%", once: true },
-    })
+    const ctx = gsap.context(() => {
+      gsap.from(headRef.current, {
+        opacity: 0, y: 30, duration: 0.7, ease: "power3.out",
+        immediateRender: false,
+        scrollTrigger: { trigger: headRef.current, start: "top 85%", once: true },
+      })
 
-    const cards = gridRef.current.querySelectorAll<HTMLElement>(".feature-card")
+      const cards = gridRef.current!.querySelectorAll<HTMLElement>(".feature-card")
 
-    gsap.from(cards, {
-      opacity: 0, y: 44, scale: 0.95,
-      stagger: 0.08, duration: 0.7, ease: "power3.out",
-      immediateRender: false,
-      scrollTrigger: { trigger: gridRef.current, start: "top 80%", once: true },
-    })
+      gsap.from(cards, {
+        opacity: 0, y: 44, scale: 0.95,
+        stagger: 0.08, duration: 0.7, ease: "power3.out",
+        immediateRender: false,
+        scrollTrigger: { trigger: gridRef.current, start: "top 80%", once: true },
+      })
 
-    // 3D tilt on each card
-    cards.forEach(card => {
-      const setRotX = gsap.quickTo(card, "rotationX", { duration: 0.4, ease: "power2.out" })
-      const setRotY = gsap.quickTo(card, "rotationY", { duration: 0.4, ease: "power2.out" })
-      gsap.set(card, { transformPerspective: 900, transformStyle: "preserve-3d" })
+      // 3D tilt on each card
+      cards.forEach(card => {
+        const setRotX = gsap.quickTo(card, "rotationX", { duration: 0.4, ease: "power2.out" })
+        const setRotY = gsap.quickTo(card, "rotationY", { duration: 0.4, ease: "power2.out" })
+        gsap.set(card, { transformPerspective: 900, transformStyle: "preserve-3d" })
 
-      let shadowX = 0, shadowY = 0
+        let shadowX = 0, shadowY = 0
 
-      const onMove = (e: MouseEvent) => {
-        const r  = card.getBoundingClientRect()
-        const cx = r.left + r.width / 2
-        const cy = r.top  + r.height / 2
-        const dx = (e.clientX - cx) / (r.width / 2)
-        const dy = (e.clientY - cy) / (r.height / 2)
-        setRotX(-dy * 8)
-        setRotY( dx * 8)
-        shadowX = dx * 12
-        shadowY = dy * 12
-        card.style.boxShadow = `${-shadowX}px ${-shadowY}px 36px rgba(79,70,229,0.12), 0 0 48px -12px rgba(0,0,0,0.5)`
-      }
-      const onLeave = () => {
-        setRotX(0); setRotY(0)
-        card.style.boxShadow = ""
-      }
-      card.addEventListener("mousemove", onMove)
-      card.addEventListener("mouseleave", onLeave)
-    })
+        const onMove = (e: MouseEvent) => {
+          const r  = card.getBoundingClientRect()
+          const cx = r.left + r.width / 2
+          const cy = r.top  + r.height / 2
+          const dx = (e.clientX - cx) / (r.width / 2)
+          const dy = (e.clientY - cy) / (r.height / 2)
+          setRotX(-dy * 8)
+          setRotY( dx * 8)
+          shadowX = dx * 12
+          shadowY = dy * 12
+          card.style.boxShadow = `${-shadowX}px ${-shadowY}px 36px rgba(79,70,229,0.12), 0 0 48px -12px rgba(0,0,0,0.5)`
+        }
+        const onLeave = () => {
+          setRotX(0); setRotY(0)
+          card.style.boxShadow = ""
+        }
+        card.addEventListener("mousemove", onMove)
+        card.addEventListener("mouseleave", onLeave)
+        cleanups.push(() => {
+          card.removeEventListener("mousemove", onMove)
+          card.removeEventListener("mouseleave", onLeave)
+        })
+      })
+    }, sectionRef)
+
+    return () => {
+      cleanups.forEach(fn => fn())
+      ctx.revert()
+    }
   }, [])
 
   return (
@@ -157,8 +174,7 @@ export default function HvacFeatures({ config }: Props) {
         {/* 3D tilt grid */}
         <div
           ref={gridRef}
-          className="grid gap-5"
-          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))" }}
+          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
           {reasons.map((reason, i) => {
             const IconEl = REASON_ICONS[reason.icon] ?? REASON_ICONS.award
@@ -166,8 +182,8 @@ export default function HvacFeatures({ config }: Props) {
             return (
               <div
                 key={i}
-                className="feature-card tilt-card card-dark cursor-default"
-                style={{ padding: "2rem", transform: `rotate(${i % 2 === 0 ? -0.6 : 0.6}deg)` }}
+                className="feature-card tilt-card card-dark cursor-default flex flex-col h-full"
+                style={{ padding: "2rem" }}
               >
                 {/* Number */}
                 <div
@@ -220,13 +236,18 @@ export default function HvacFeatures({ config }: Props) {
                   {reason.desc}
                 </p>
 
-                {/* Bottom gradient rule */}
-                <div
-                  className="mt-5 h-px"
-                  style={{
-                    background: "linear-gradient(90deg, rgba(79,70,229,0.4), transparent)",
-                  }}
-                />
+                {/* Bottom gradient rule — mt-auto pins this wrapper to the bottom
+                    of every card regardless of description length, so the rule
+                    lines up across a row instead of floating at a different
+                    height per card */}
+                <div className="mt-auto pt-5">
+                  <div
+                    className="h-px"
+                    style={{
+                      background: "linear-gradient(90deg, rgba(79,70,229,0.4), transparent)",
+                    }}
+                  />
+                </div>
               </div>
             )
           })}
