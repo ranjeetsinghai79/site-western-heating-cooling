@@ -2,7 +2,6 @@ import type { SiteConfig } from "@core/web/types"
 
 export const config: SiteConfig = {
   business: {
-    location: { lat: 37.6932989, lng: -121.9044578 },
     name: "Western Heating & Cooling",
     tagline: "High-efficiency Western climate HVAC solutions.",
     phone: "(877) 987-4822",
