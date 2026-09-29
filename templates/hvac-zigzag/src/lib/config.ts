@@ -69,14 +69,15 @@ export const config: SiteConfig = {
     "4.8★ Google Rating",
     "2015 PG&E ACQC Contractor of the Year",
     "Mon–Fri 8AM–5PM",
+    "9,999+ High Efficiency Blower Fan Motor Retrofits Performed"
   ],
 
 testimonials: [],
 
   stats: [
     { value: 4.8, label: "Google Rating", suffix: "★", decimals: 1 },
-    { value: 59, label: "Google Reviews", suffix: "+", decimals: 0 },
-    { value: 3, label: "PG&E Rebate Programs", suffix: "", decimals: 0 }
+    { value: 9999, label: "Blower Motor Retrofits", suffix: "+", decimals: 0 },
+    { value: 59, label: "Google Reviews", suffix: "+", decimals: 0 }
   ],
 
   reasons: [
