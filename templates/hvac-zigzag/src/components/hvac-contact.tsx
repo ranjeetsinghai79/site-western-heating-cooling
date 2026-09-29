@@ -16,10 +16,10 @@ const SERVICES = [
 ]
 
 const DISPATCH_STATS = [
-  { label: "On Call Now",      value: "12" },
-  { label: "Avg Response",     value: "45m" },
-  { label: "Jobs Today",       value: "7"  },
-  { label: "Availability",     value: "24/7" },
+  { label: "CA License",       value: "999624" },
+  { label: "Google Rating",    value: "4.8★" },
+  { label: "PG&E Award",       value: "2015" },
+  { label: "Office Hours",     value: "Mon–Fri 8–5" },
 ]
 
 type Step = 1 | 2 | 3
