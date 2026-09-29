@@ -20,7 +20,7 @@ export default function HvacHero({ config }: Props) {
   const TRUST = [
     { label: `${business.google_rating}★ Google` },
     { label: `${business.review_count} Reviews` },
-    { label: "24/7 Emergency" },
+    { label: "CA Lic #999624" },
     { label: "Upfront Pricing" },
   ]
 
