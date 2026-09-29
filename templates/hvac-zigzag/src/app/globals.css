@@ -286,3 +286,16 @@ body {
   --brand-grad-to: #0EA5E9;
   --shadow-cta: 0 8px 32px -4px rgba(14,165,233,0.35);
 }
+
+/* ── Design Profile: Editorial Luxury ── */
+/* ── Fonts: Cardo + Jost ── */
+:root {
+  --font-display: 'Cardo', serif;
+  --font-body: 'Jost', sans-serif;
+  --brand-accent: #0EA5E9;
+  --brand-accent-light: #38BDF8;
+  --brand-accent-glow: rgba(14,165,233,0.25);
+  --brand-grad-from: #38BDF8;
+  --brand-grad-to: #0EA5E9;
+  --shadow-cta: 0 8px 32px -4px rgba(14,165,233,0.35);
+}
