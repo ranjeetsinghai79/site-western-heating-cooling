@@ -47,6 +47,12 @@ export interface Business {
   address: string
   city: string
   serviceAreas: string[]
+  /** Exact coordinates from the business's Google Maps listing, when known — used for a precise map pin instead of an address-text search. */
+  location?: { lat: number; lng: number }
+  /** Real logo scraped from the business's existing site (builder uploads it to /logo.png) — omit entirely rather than inventing one. */
+  logoUrl?: string
+  /** Real Google Maps listing URL, when known — lets a Reviews section link out to real reviews instead of fabricating quotes when no review text was scraped. */
+  googleMapsUri?: string
   since: string
   google_rating: string
   review_count: string
@@ -58,6 +64,8 @@ export interface Business {
   niche: NicheName
   /** Free-form hours summary, e.g. "Open 24 hours" or "Mon–Fri 8am–6pm" */
   hours?: string
+  /** How many real /gallery-N.jpg files were actually uploaded for this build (hvac-zigzag's on-the-job carousel). No pipeline agent currently sources these automatically — leave unset and a template falls back to its own small honest default rather than a large placeholder set. */
+  galleryCount?: number
   /** Lawfirm: lead attorney bio */
   attorney?: { name: string; credentials: string; bio: string; yearsExp?: number }
 }
@@ -143,6 +151,8 @@ export interface SiteConfig {
   tier?: 'regular' | 'premium' | 'custom'
   /** Pexels (or any) video URL for the hero background — scroll-scrubbed on premium tier */
   heroVideo?: string
+  /** JPG frame sequence for ScrollSequenceHero, extracted from the generated hero video */
+  heroFrames?: { count: number; basePath: string }
   services?: Service[]
   testimonials?: Testimonial[]
   trustBadges?: string[]
