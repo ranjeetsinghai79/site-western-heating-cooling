@@ -18,7 +18,7 @@ export default function Home() {
       <HvacNav config={config} />
       <main>
         <HvacHero       config={config} />
-        <HvacTicker />
+        <HvacTicker     config={config} />
         <HvacStats      config={config} />
         <HvacServices   config={config} />
         <HvacFeatures   config={config} />
