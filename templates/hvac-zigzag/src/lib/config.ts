@@ -17,7 +17,6 @@ export const config: SiteConfig = {
       "Western United States"
     ],
     license: "999624",
-    since: "2014",
     google_rating: "4.8",
     review_count: "59",
     emergency: false,
@@ -66,17 +65,9 @@ export const config: SiteConfig = {
 
   testimonials: [],
 
-  trustBadges: [
-    "PG&E Quality Installation Contractor",
-    "CheckMe!\u00ae Certified Contractor",
-    "Nest Pro",
-    "Licensed Contractor #999624"
-  ],
-
   stats: [
     { value: 4.8, label: "Google Rating", suffix: "★", decimals: 1 },
     { value: 9999, label: "Motor Retrofits", suffix: "+", decimals: 0 },
-    { value: 10, label: "Years Excellence", suffix: "+", decimals: 0 }
   ],
 
   reasons: [
