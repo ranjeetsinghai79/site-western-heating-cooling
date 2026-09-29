@@ -3,8 +3,9 @@ import type { SiteConfig } from "@core/web/types"
 export const config: SiteConfig = {
   business: {
     logoUrl: "/logo.png",
+    location: { lat: 37.6932989, lng: -121.9044578 },
     name: "Western Heating & Cooling",
-    tagline: "Optimize cooling for dry climates.",
+    tagline: "High-efficiency Western climate HVAC solutions.",
     phone: "(877) 987-4822",
     phoneHref: "tel:+18779874822",
     email: "contact@westerncooling.com",
@@ -16,122 +17,103 @@ export const config: SiteConfig = {
       "Western United States"
     ],
     license: "999624",
-    since: "2010",
+    since: "2014",
     google_rating: "4.8",
     review_count: "59",
-    emergency: true,
+    emergency: false,
     theme: "clean",
     niche: "hvac",
   },
 
   services: [
     { 
-      icon: "thermometer", 
-      title: "AC & Heating Installation", 
-      desc: "Precision installations designed for maximum energy efficiency.", 
+      icon: "home", 
+      title: "New AC & Heating Installs", 
+      desc: "Precision installations designed for optimal energy efficiency in dry Western climates.", 
       urgent: false 
     },
     { 
-      icon: "shield-check", 
+      icon: "thermometer", 
       title: "Seasonal Maintenance", 
-      desc: "Comprehensive pre-season check-ups to ensure peak performance.", 
+      desc: "Comprehensive pre-season check-ups to ensure peak performance year-round.", 
       urgent: false 
     },
     { 
       icon: "wrench", 
       title: "Repair & Diagnostics", 
-      desc: "Expert troubleshooting to restore your comfort quickly.", 
+      desc: "Expert troubleshooting and lasting repairs for all major HVAC brands.", 
       urgent: true 
     },
     { 
       icon: "zap", 
       title: "Blower Motor Upgrades", 
-      desc: "Advanced retrofits featuring Western Cooling Control™ technology.", 
+      desc: "High-efficiency Concept 3™ and Western Cooling Control™ retrofits.", 
       urgent: false 
     },
     { 
       icon: "dollar-sign", 
       title: "PG&E Home Rebates", 
-      desc: "Maximize savings through the Comfortable Home Rebates program.", 
+      desc: "Maximize your savings with the Comfortable Home Rebates Program.", 
       urgent: false 
     },
     { 
-      icon: "home", 
+      icon: "briefcase", 
       title: "Multifamily HVAC Upgrades", 
-      desc: "Scale efficiency with the PG&E MFCO upgrade program.", 
+      desc: "Scalable energy-efficient solutions for multifamily property managers.", 
       urgent: false 
     }
   ],
 
-  testimonials: [
-    { 
-      name: "Sarah Jenkins", 
-      location: "Pleasanton, CA", 
-      stars: 5, 
-      text: "Western Heating & Cooling completely transformed our home's comfort. Their blower motor upgrade not only made our AC run whisper-quiet but also slashed our summer energy bills by 30%. The technicians were incredibly professional and left the workspace spotless." 
-    },
-    { 
-      name: "David Chen", 
-      location: "Central Valley, CA", 
-      stars: 5, 
-      text: "When our AC died during a brutal heatwave, they responded immediately. The diagnostic was thorough, and they explained the PG&E rebate program perfectly, saving us thousands on a high-efficiency replacement. I wouldn't trust anyone else with my HVAC." 
-    },
-    { 
-      name: "Marcus Thorne", 
-      location: "Pleasanton, CA", 
-      stars: 5, 
-      text: "As a property manager, I rely on Western for all our multifamily HVAC upgrades. Their expertise with PG&E MFCO programs is unmatched. They consistently deliver on time, on budget, and with exceptional quality control across all our properties." 
-    }
-  ],
+  testimonials: [],
 
   trustBadges: [
-    "CA License #999624", 
-    "PG&E Contractor of the Year", 
-    "UC Davis Cooling Innovations", 
-    "Mon–Fri 8AM–5PM"
+    "PG&E Quality Installation Contractor",
+    "CheckMe!\u00ae Certified Contractor",
+    "Nest Pro",
+    "Licensed Contractor #999624"
   ],
 
   stats: [
     { value: 4.8, label: "Google Rating", suffix: "★", decimals: 1 },
-    { value: 9999, label: "Motor Upgrades", suffix: "+", decimals: 0 },
+    { value: 9999, label: "Motor Retrofits", suffix: "+", decimals: 0 },
     { value: 10, label: "Years Excellence", suffix: "+", decimals: 0 }
   ],
 
   reasons: [
     { 
       icon: "award", 
-      title: "Award-Winning Experts", 
-      desc: "Recognized as PG&E ACQC Contractor of the Year for unparalleled installation quality." 
+      title: "Award-Winning Expertise", 
+      desc: "Recognized as PG&E ACQC Contractor of the Year for unmatched installation quality." 
     },
     { 
       icon: "zap", 
       title: "Efficiency Innovators", 
-      desc: "Utilizing UC Davis Western Cooling Efficiency Center inspired technology for maximum savings." 
+      desc: "Pioneering cooling solutions inspired by the UC Davis Western Cooling Efficiency Center." 
     },
     { 
       icon: "dollar-sign", 
       title: "Rebate Specialists", 
-      desc: "Expertly navigating PG&E rebate programs to maximize your return on investment." 
+      desc: "We navigate PG&E rebate programs to maximize your investment in high-efficiency comfort." 
     },
     { 
       icon: "shield-check", 
-      title: "Quality Installation", 
-      desc: "Rigorous field quality control ensures your high-efficiency system operates flawlessly." 
+      title: "Immaculate Installations", 
+      desc: "Every system is installed with exacting precision to ensure flawless, long-lasting performance." 
     },
     { 
       icon: "clock", 
-      title: "Prompt Diagnostics", 
-      desc: "Rapid, precise troubleshooting to restore your climate control without unnecessary delays." 
+      title: "Prompt Professionalism", 
+      desc: "Respecting your time with punctual arrivals and efficient, minimally invasive service." 
     },
     { 
       icon: "thumbs-up", 
-      title: "Proven Track Record", 
-      desc: "Over 9,999 high-efficiency blower fan motor retrofits successfully performed across California." 
+      title: "Guaranteed Satisfaction", 
+      desc: "Backed by rigorous quality control standards and a commitment to absolute client comfort." 
     }
   ],
 
   formServiceOptions: [
-    "AC & Heating Installation",
+    "New AC & Heating Installs",
     "Seasonal Maintenance",
     "Repair & Diagnostics",
     "Blower Motor Upgrades",
