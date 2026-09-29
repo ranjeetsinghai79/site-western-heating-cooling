@@ -2,6 +2,8 @@ import type { SiteConfig } from "@core/web/types"
 
 export const config: SiteConfig = {
   business: {
+    galleryCount: 6,
+    googleMapsUri: "https://maps.google.com/?cid=16748399684560017842&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
     name: "Western Heating & Cooling",
     tagline: "High-efficiency Western climate HVAC solutions.",
     phone: "(877) 987-4822",
@@ -73,7 +75,8 @@ testimonials: [],
 
   stats: [
     { value: 4.8, label: "Google Rating", suffix: "★", decimals: 1 },
-    { value: 9999, label: "Motor Retrofits", suffix: "+", decimals: 0 },
+    { value: 59, label: "Google Reviews", suffix: "+", decimals: 0 },
+    { value: 3, label: "PG&E Rebate Programs", suffix: "", decimals: 0 }
   ],
 
   reasons: [
