@@ -40,7 +40,7 @@ export const config: SiteConfig = {
       icon: "wrench", 
       title: "Repair & Diagnostics", 
       desc: "Expert troubleshooting and lasting repairs for all major HVAC brands.", 
-      urgent: true 
+      urgent: false 
     },
     { 
       icon: "zap", 
